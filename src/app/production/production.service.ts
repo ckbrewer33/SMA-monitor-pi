@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +22,6 @@ export class ProductionService {
   }
 
   private getRandomNumber(): number {
-    console.log('generating a random number');
-    return Math.random() * 10;
+    return Math.floor(Math.random() * (100 - 1) + 1);
   }
 }

@@ -3,18 +3,18 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { ProductionService } from './production.service';
 
 @Component({
-  selector: 'app-production',
+  selector: 'sunnypi-production',
   templateUrl: './production.component.html',
   styleUrls: ['./production.component.scss']
 })
 export class ProductionComponent implements OnInit {
   private sub?: Subscription;
-  percent = 0;
+  pvPowerPercent = 0;
 
   constructor(private productionService: ProductionService) { }
 
   ngOnInit(): void {
-    this.sub = this.productionService.productionPercent.subscribe((data => this.percent = data));
+    this.sub = this.productionService.productionPercent.subscribe((data => this.pvPowerPercent = data));
   }
 
   ngOnDestroy(): void {

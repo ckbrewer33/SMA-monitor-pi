@@ -8,7 +8,7 @@ describe('ProductionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductionComponent ]
+      declarations: [ ProductionComponent ],
     })
     .compileComponents();
 

@@ -1,0 +1,11 @@
+<div class="number-bar">
+  <h3>{{title}}</h3>
+  <div class="fill-box">
+    <div class="fill">
+      <div class="color" [style.width.px]="fillPercent"
+                         [@stateChange]="state"
+      >&nbsp;</div>
+    </div>
+    <div class="number">{{fillPercent}} %</div>
+  </div>
+</div>
