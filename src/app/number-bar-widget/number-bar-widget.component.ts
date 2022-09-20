@@ -8,9 +8,9 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'sunnypi-number-bar',
-  templateUrl: './number-bar.component.html',
-  styleUrls: ['./number-bar.component.scss'],
+  selector: 'sunnypi-number-bar-widget',
+  templateUrl: './number-bar-widget.component.html',
+  styleUrls: ['./number-bar-widget.component.scss'],
   animations: [
     trigger('stateChange', [
       state('low', style({
@@ -28,7 +28,7 @@ import {
     ])
   ]
 })
-export class NumberBarComponent implements OnInit {
+export class NumberBarWidgetComponent implements OnInit {
   @Input() title = "untitled";
   @Input() fillPercent = 50;
 

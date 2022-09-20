@@ -11,15 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductionComponent } from './production/production.component';
-import { NumberBarComponent } from './production/number-bar/number-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NumberBarWidgetComponent } from './number-bar-widget/number-bar-widget.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NumberBarComponent,
     ProductionComponent,
     NavbarComponent,
+    NumberBarWidgetComponent,
   ],
   imports: [
     AppRoutingModule,
