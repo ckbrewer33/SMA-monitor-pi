@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductionComponent } from './overview.component';
+import { OverviewComponent } from './overview.component';
 
-describe('ProductionComponent', () => {
-  let component: ProductionComponent;
-  let fixture: ComponentFixture<ProductionComponent>;
+describe('OverviewComponent', () => {
+  let component: OverviewComponent;
+  let fixture: ComponentFixture<OverviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductionComponent ],
+      declarations: [ OverviewComponent ],
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProductionComponent);
+    fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
