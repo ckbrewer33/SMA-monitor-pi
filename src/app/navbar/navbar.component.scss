@@ -3,14 +3,19 @@
 
 .navbar {
   @include mat.elevation(6);
+
+  a {
+    font-size: 1.0em;
+  }
 }
 
 .logo {
   max-width: 2.5em;
+  font-size: 1.2em;
 }
 
 .app-title {
-  margin-left: 10px;
+  font-size: 1.25em;
 }
 
 .spacer {
