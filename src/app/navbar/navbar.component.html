@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="navbar">
+  <mat-icon class="logo">wb_sunny</mat-icon>
+  <a mat-button href="/" class="app-title">Sunny Pi</a>
+  
+  <div class="spacer"></div>
+  
+  <div class="desktop-options">
+    <a mat-button href="/production">Production</a>
+  </div>
+
+  <div class="mobile-menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/production']">
+        <span>Production</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

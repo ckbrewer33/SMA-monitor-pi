@@ -1,8 +1,18 @@
-.app-container {
-  
-  border: 2px solid red;
-  padding: 5px;
+@import 'src/styles.scss';
 
-  width: 700px;
-  height: 380px;
+.wrapper {
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header, .footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.app-body {
+  flex-grow: 1;
+  background-color: $dark-background;
 }

@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+@import 'src/styles.scss';
+
+.navbar {
+  @include mat.elevation(6);
+}
+
+.logo {
+  max-width: 2.5em;
+}
+
+.app-title {
+  margin-left: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+@media only screen and (max-width: $desktop-min-screen-size) {
+  .desktop-options {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: $desktop-min-screen-size) {
+  .mobile-menu {
+    display: none;
+  }
+}

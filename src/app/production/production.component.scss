@@ -1,0 +1,8 @@
+@use '@angular/material' as mat;
+
+.card {
+  @include mat.elevation(3);
+  display: flex;
+  justify-content: center;
+  width: 225px
+}

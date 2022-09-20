@@ -12,7 +12,7 @@ export class ProductionService {
       setInterval(() => {
         let nextNumber = this.getRandomNumber();
         observer.next(nextNumber)
-      }, 1000);
+      }, 2000);
     });
 
   }

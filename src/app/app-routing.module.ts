@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductionComponent } from './production/production.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/production', pathMatch: 'full'},
   { path: 'production', component: ProductionComponent }
 ];
 
