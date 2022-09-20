@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductionComponent } from './production/production.component';
+import { OverviewComponent } from './overview/overview.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/production', pathMatch: 'full'},
-  { path: 'production', component: ProductionComponent }
+  { path: '', redirectTo: '/overview', pathMatch: 'full'},
+  { path: 'overview', component: OverviewComponent }
 ];
 
 @NgModule({

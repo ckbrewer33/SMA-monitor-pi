@@ -3,11 +3,11 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { SmaService } from './sma.service';
 
 @Component({
-  selector: 'sunnypi-production',
-  templateUrl: './production.component.html',
-  styleUrls: ['./production.component.scss']
+  selector: 'sunnypi-overview',
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.scss']
 })
-export class ProductionComponent implements OnInit {
+export class OverviewComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   pvPower = 0;
   pvPowerMax = 7300;
@@ -23,11 +23,20 @@ export class ProductionComponent implements OnInit {
   }
 
   private getCurrentPowerSubscription(): Subscription {
-    return this.productionService.productionPercent.subscribe((data => this.pvPower = data))
+    return this.productionService.productionPercent.subscribe((data => this.pvPower = data));
   }
 
   private getPvEnergyTodaySubscription(): Subscription {
-    return this.productionService.pvEnergy.subscribe((data => this.pvEnergyToday += data))
+    return this.productionService.pvEnergy.subscribe((data => {
+      // Test to make sure the energy value doesn't go negative.
+      // Yes, this is just fake data, but may as well make it look good.
+      const tmp = this.pvEnergyToday + data;
+      if (tmp < 0) {
+        this.pvEnergyToday = 0;
+      } else {
+        this.pvEnergyToday = tmp;
+      }
+    }));
   }
 
   ngOnDestroy(): void {
