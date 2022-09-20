@@ -1,4 +1,4 @@
-.fill-box {
+.number-widget {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,13 +10,28 @@
     height: 30px;
   }
 
-  .number {
+  .value-container {
+    margin-bottom: 10px;
+    .value {
+      font-size: 1.75em;
+      color: blue;
+    }
+
+    .units {
+      margin-left: 5px;
+    }
+  }
+
+  .value {
     margin: 0 10px;
   }
 
   .color {
     position: relative;
     height: 30px;
-    background-color: green;
+  }
+
+  .spacer {
+    margin: 8px 0;
   }
 }

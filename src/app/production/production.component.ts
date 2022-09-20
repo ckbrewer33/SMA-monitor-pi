@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ProductionService } from './production.service';
+import { SmaService } from './sma.service';
 
 @Component({
   selector: 'sunnypi-production',
@@ -8,17 +8,33 @@ import { ProductionService } from './production.service';
   styleUrls: ['./production.component.scss']
 })
 export class ProductionComponent implements OnInit {
-  private sub?: Subscription;
-  pvPowerPercent = 0;
+  private subscriptions: Subscription[] = [];
+  pvPower = 0;
+  pvPowerMax = 7300;
+  pvPowerUnits = 'W'
+  pvEnergyToday = 7.0;
+  pvEnergyTodayUnits = 'kWh';
 
-  constructor(private productionService: ProductionService) { }
+  constructor(private productionService: SmaService) { }
 
   ngOnInit(): void {
-    this.sub = this.productionService.productionPercent.subscribe((data => this.pvPowerPercent = data));
+    this.subscriptions.push(this.getCurrentPowerSubscription());
+    this.subscriptions.push(this.getPvEnergyTodaySubscription());
+  }
+
+  private getCurrentPowerSubscription(): Subscription {
+    return this.productionService.productionPercent.subscribe((data => this.pvPower = data))
+  }
+
+  private getPvEnergyTodaySubscription(): Subscription {
+    return this.productionService.pvEnergy.subscribe((data => this.pvEnergyToday += data))
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.closeAllSubscriptions();
   }
 
+  private closeAllSubscriptions(): void {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 }

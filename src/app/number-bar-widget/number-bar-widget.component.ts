@@ -19,7 +19,7 @@ import {
       state('med', style({
         backgroundColor: 'yellow'
       })),
-      state('hight', style({
+      state('high', style({
         backgroundColor: 'green'
       })),
       transition('* => low, * => med, * => high', [
@@ -30,7 +30,12 @@ import {
 })
 export class NumberBarWidgetComponent implements OnInit {
   @Input() title = "untitled";
-  @Input() fillPercent = 50;
+  @Input() value = 50;
+  @Input() maxValue?: number = 1;
+  @Input() units?: string;
+  @Input() showBar = true;
+
+  fillPercent = 100;
 
   private readonly lowPercent = 33;
   private readonly medPercent = 66;
@@ -49,11 +54,23 @@ export class NumberBarWidgetComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.state = this.getStateFromFillPercent();
+    if (this.showBar) {
+      this.updateFillPercent();
+      this.state = this.getStateFromFillPercent();
+    }
+  }
+
+  private updateFillPercent(): void {
+      if (!this.maxValue) {
+        this.maxValue = 1;
+      }
+
+      this.fillPercent = (this.value / this.maxValue) * 100;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['fillPercent']) {
+    if (changes['value']) {
+      this.updateFillPercent()
       this.state = this.getStateFromFillPercent();
     }
   }

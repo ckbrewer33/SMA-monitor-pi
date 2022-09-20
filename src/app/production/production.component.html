@@ -1,7 +1,20 @@
+<div class="widgets">
+  <mat-card id="current-power" class="card">
+    <mat-card-content>
+      <sunnypi-number-bar-widget [title]="'Current Solar Power'"
+                                 [value]="pvPower"
+                                 [maxValue]="pvPowerMax"
+                                 [units]="pvPowerUnits"></sunnypi-number-bar-widget>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card class="card">
-  <mat-card-content>
-    <sunnypi-number-bar-widget [title]="'Current PV Power'"
-                        [fillPercent]="pvPowerPercent"></sunnypi-number-bar-widget>
-  </mat-card-content>
-</mat-card>
+  <mat-card  class="card">
+    <mat-card-content>
+      <sunnypi-number-bar-widget [title]="'Current Solar Power'"
+                                 [value]="pvEnergyToday"
+                                 [units]="pvEnergyTodayUnits"
+                                 [showBar]="false"></sunnypi-number-bar-widget>
+    </mat-card-content>
+  </mat-card>
+
+</div>

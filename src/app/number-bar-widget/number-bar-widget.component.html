@@ -1,7 +1,14 @@
-<div class="number-bar">
+<div class="number-widget">
   <h3>{{title}}</h3>
-  <div class="fill-box">
-    <div class="number">{{fillPercent}} %</div>
+
+  <div class="spacer" *ngIf="!showBar"></div>
+
+  <div class="value-container">
+    <span class="value">{{value | number: '1.2-2'}}</span>
+    <span class="units">{{units}}</span>
+  </div>
+
+  <div class="fill-box" *ngIf="showBar">
     <div class="fill">
       <div class="color" [style.width.px]="fillPercent"
                          [@stateChange]="state"
