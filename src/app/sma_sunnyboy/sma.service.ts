@@ -13,48 +13,62 @@ export class SmaService {
 
   private readonly smaUrl = "http://localhost:5000/sma";
   private readonly refreshRate = 2000;
-  private readonly pvPowerMax = 7300;
+  public readonly pvPowerMax = 7000;
+
+  private currentPowerWaiting = false;
+  private powerTodayWaiting = false;
   
   constructor(private http: HttpClient) {
-    this.initProductionPercentObserver();
-    this.initPvEnergyObserver();
+    this.initCurrentPowerObserver();
+    this.initPowerTodayObserver();
   }
 
-  private initProductionPercentObserver() {
+  private initCurrentPowerObserver() {
     this._currentProduction = new Observable<number>(observer => {
       setInterval(() => {
-        this.getPvPower().subscribe(pvPower => observer.next(pvPower));
+        if (this.currentPowerWaiting) {
+          return;
+        }
+
+        this.currentPowerWaiting = true;
+        this.getPvPower().subscribe(pvPower => {
+          observer.next(pvPower);
+          this.currentPowerWaiting = false;
+        });
       }, this.refreshRate);
     });
   }
 
   public getPvPower(): Observable<any> {
+    console.log('fetching current power');
     return this.http.get(`${this.smaUrl}/pvpower`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  get currentProduction(): Observable<number> {
+  get currentPower(): Observable<number> {
     return this._currentProduction;
   }
 
-  private initPvEnergyObserver() {
+  private initPowerTodayObserver() {
     this._powerToday = new Observable<number>(observer => {
       setInterval(() => {
+        if (this.powerTodayWaiting) {
+          return;
+        }
+
+        this.powerTodayWaiting = true;
         this.getPowerToday().subscribe(wattsToday => {
-          const kiloWattsToday = this.convertWattToKwatt(wattsToday);
-          observer.next(kiloWattsToday)
+          observer.next(wattsToday);
+          this.powerTodayWaiting = false;
         });
       }, this.refreshRate);
     });
   }
 
-  private convertWattToKwatt(watts: number): number {
-    return watts / 1000;
-  }
-
   public getPowerToday(): Observable<any> {
+    console.log('fetching power today');
     return this.http.get(`${this.smaUrl}/powertoday`)
       .pipe(
         catchError(this.handleError)
@@ -65,8 +79,13 @@ export class SmaService {
     return this._powerToday;
   }
 
-
-  // public getPowerToday():
+  get powerTotal(): Observable<any> {
+    console.log('fetching power total');
+    return this.http.get(`${this.smaUrl}/powertotal`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
