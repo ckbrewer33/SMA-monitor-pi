@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { SmaService } from './sma.service';
+import { SmaService } from '../sma_sunnyboy/sma.service';
+
 
 @Component({
   selector: 'sunnypi-overview',
@@ -12,10 +13,10 @@ export class OverviewComponent implements OnInit {
   pvPower = 0;
   pvPowerMax = 7300;
   pvPowerUnits = 'W'
-  pvEnergyToday = 7.0;
+  pvEnergyToday = 0.0;
   pvEnergyTodayUnits = 'kWh';
 
-  constructor(private productionService: SmaService) { }
+  constructor(private smaService: SmaService) { }
 
   ngOnInit(): void {
     this.subscriptions.push(this.getCurrentPowerSubscription());
@@ -23,19 +24,12 @@ export class OverviewComponent implements OnInit {
   }
 
   private getCurrentPowerSubscription(): Subscription {
-    return this.productionService.productionPercent.subscribe((data => this.pvPower = data));
+    return this.smaService.currentProduction.subscribe((data => this.pvPower = data));
   }
 
   private getPvEnergyTodaySubscription(): Subscription {
-    return this.productionService.pvEnergy.subscribe((data => {
-      // Test to make sure the energy value doesn't go negative.
-      // Yes, this is just fake data, but may as well make it look good.
-      const tmp = this.pvEnergyToday + data;
-      if (tmp < 0) {
-        this.pvEnergyToday = 0;
-      } else {
-        this.pvEnergyToday = tmp;
-      }
+    return this.smaService.powerToday.subscribe((data => {
+      this.pvEnergyToday = data;
     }));
   }
 
@@ -46,4 +40,5 @@ export class OverviewComponent implements OnInit {
   private closeAllSubscriptions(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
   }
+
 }

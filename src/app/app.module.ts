@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,7 +15,6 @@ import { OverviewComponent } from './overview/overview.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NumberBarWidgetComponent } from './number-bar-widget/number-bar-widget.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +26,7 @@ import { NumberBarWidgetComponent } from './number-bar-widget/number-bar-widget.
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
